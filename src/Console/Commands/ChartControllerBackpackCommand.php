@@ -2,7 +2,6 @@
 
 namespace Backpack\Generators\Console\Commands;
 
-use Artisan;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 
