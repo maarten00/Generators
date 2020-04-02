@@ -2,11 +2,11 @@
 
 namespace Backpack\Generators;
 
+use Backpack\Generators\Console\Commands\ChartBackpackCommand;
+use Backpack\Generators\Console\Commands\ChartControllerBackpackCommand;
 use Backpack\Generators\Console\Commands\ConfigBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudBackpackCommand;
-use Backpack\Generators\Console\Commands\ChartBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudControllerBackpackCommand;
-use Backpack\Generators\Console\Commands\ChartControllerBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudModelBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudOperationBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudRequestBackpackCommand;
