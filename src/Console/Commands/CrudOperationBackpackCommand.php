@@ -3,6 +3,7 @@
 namespace Backpack\Generators\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 
 class CrudOperationBackpackCommand extends GeneratorCommand
 {
@@ -80,7 +81,7 @@ class CrudOperationBackpackCommand extends GeneratorCommand
      */
     protected function replaceNameStrings(&$stub, $name)
     {
-        $table = str_plural(ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', str_replace($this->getNamespace($name).'\\', '', $name))), '_'));
+        $table = Str::plural(ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', str_replace($this->getNamespace($name).'\\', '', $name))), '_'));
 
         $stub = str_replace('DummyTable', $table, $stub);
         $stub = str_replace('dummy_class', strtolower(str_replace($this->getNamespace($name).'\\', '', $name)), $stub);

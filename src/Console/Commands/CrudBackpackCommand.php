@@ -52,7 +52,7 @@ class CrudBackpackCommand extends Command
 
         // Create the sidebar item
         Artisan::call('backpack:add-sidebar-content', [
-            'code' => "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('".$lowerName."') }}'><i class='nav-icon fa fa-question'></i> ".Str::plural($name).'</a></li>',
+            'code' => "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('".$lowerName."') }}'><i class='nav-icon la la-question'></i> ".Str::plural($name).'</a></li>',
         ]);
         echo Artisan::output();
     }

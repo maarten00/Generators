@@ -5,28 +5,28 @@ namespace Backpack\Generators\Console\Commands;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 
-class CrudControllerBackpackCommand extends GeneratorCommand
+class ChartControllerBackpackCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'backpack:crud-controller';
+    protected $name = 'backpack:chart-controller';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-controller {name}';
+    protected $signature = 'backpack:chart-controller {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate a Backpack CRUD controller';
+    protected $description = 'Generate a Backpack ChartController';
 
     /**
      * The type of class being generated.
@@ -46,7 +46,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
     {
         $name = str_replace($this->laravel->getNamespace(), '', $name);
 
-        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'CrudController.php';
+        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'ChartController.php';
     }
 
     /**
@@ -56,7 +56,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/crud-controller.stub';
+        return __DIR__.'/../stubs/chart-controller.stub';
     }
 
     /**
@@ -68,7 +68,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Controllers\Admin';
+        return $rootNamespace.'\Http\Controllers\Admin\Charts';
     }
 
     /**
@@ -79,12 +79,9 @@ class CrudControllerBackpackCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function replaceNameStrings(&$stub, $name)
+    protected function replaceRouteStrings(&$stub)
     {
-        $table = Str::plural(ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', str_replace($this->getNamespace($name).'\\', '', $name))), '_'));
-
-        $stub = str_replace('DummyTable', $table, $stub);
-        $stub = str_replace('dummy_class', strtolower(str_replace($this->getNamespace($name).'\\', '', $name)), $stub);
+        $stub = str_replace('dummy-class', Str::kebab($this->argument('name')), $stub);
 
         return $this;
     }
@@ -100,7 +97,9 @@ class CrudControllerBackpackCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replaceNamespace($stub, $name)->replaceNameStrings($stub, $name)->replaceClass($stub, $name);
+        return $this->replaceNamespace($stub, $name)
+                    ->replaceRouteStrings($stub)
+                    ->replaceClass($stub, $name);
     }
 
     /**
