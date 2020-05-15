@@ -90,22 +90,6 @@ class CrudControllerBackpackCommand extends GeneratorCommand
         return $this;
     }
 
-    protected function getFields($model)
-    {
-        $columns = [];
-        $model = new $model;
-
-        // if fillable was defined, use that as the columns
-        if (! count($model->getFillable())) {
-            $columns = $model->getFillable();
-        } else {
-            // otherwise, if guarded is used, just pick up the columns straight from the bd table
-            $columns = \Schema::getColumnListing($model->getTable());
-        }
-
-        return $column;
-    }
-
     protected function getAttributes($model)
     {
         $attributes = [];
