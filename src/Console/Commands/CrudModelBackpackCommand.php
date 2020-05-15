@@ -37,7 +37,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
 
     /**
      * The trait that allows a model to have an admin panel.
-     * 
+     *
      * @var string
      */
     protected $crudTrait = 'Backpack\CRUD\app\Models\Traits\CrudTrait';
@@ -56,12 +56,11 @@ class CrudModelBackpackCommand extends GeneratorCommand
         $path = $this->getPath($name);
 
         // First we will check to see if the class already exists. If it does, we don't want
-        // to create the class and overwrite the user's code. We just make sure it uses CrudTrait 
+        // to create the class and overwrite the user's code. We just make sure it uses CrudTrait
         // We add that one line. Otherwise, we will continue generating this class' files.
         if ((! $this->hasOption('force') ||
              ! $this->option('force')) &&
-             $this->alreadyExists($this->getNameInput())) 
-        {
+             $this->alreadyExists($this->getNameInput())) {
             $file = $this->files->get($path);
             $file_array = explode(PHP_EOL, $file);
 
@@ -69,19 +68,20 @@ class CrudModelBackpackCommand extends GeneratorCommand
             // if it does, do nothing
             if (Str::contains($file, [$this->crudTrait])) {
                 $this->info('Model already exists and uses CrudTrait.');
+
                 return false;
             }
-            
+
             // if it does not have CrudTrait, add the trait on the Model
-                
-            $classDefinition = 'class '.$this->getNameInput(). ' extends';
+
+            $classDefinition = 'class '.$this->getNameInput().' extends';
 
             foreach ($file_array as $key => $line) {
                 if (Str::contains($line, $classDefinition)) {
                     if (Str::endsWith($line, '{')) {
                         // add the trait on the next
                         $position = $key + 1;
-                    } else if ($file_array[$key+1] == '{') {
+                    } elseif ($file_array[$key + 1] == '{') {
                         // add the trait on the next next line
                         $position = $key + 2;
                     }
@@ -89,7 +89,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
                     // keep in mind that the line number shown in IDEs is not
                     // the same as the array index - arrays start counting from 0,
                     // IDEs start counting from 1
-                    
+
                     // add CrudTrait
                     array_splice($file_array, $position, 0, '    use \\'.$this->crudTrait.';');
 
@@ -102,7 +102,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
                     return false;
                 }
             }
-        
+
             $this->error('Model already exists! Could not add CrudTrait.');
 
             return false;
