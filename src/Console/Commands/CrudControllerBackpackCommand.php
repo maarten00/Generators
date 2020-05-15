@@ -3,8 +3,8 @@
 namespace Backpack\Generators\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class CrudControllerBackpackCommand extends GeneratorCommand
 {
@@ -96,7 +96,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
         $model = new $model;
 
         // if fillable was defined, use that as the columns
-        if (!count($model->getFillable())) {
+        if (! count($model->getFillable())) {
             $columns = $model->getFillable();
         } else {
             // otherwise, if guarded is used, just pick up the columns straight from the bd table
@@ -106,14 +106,13 @@ class CrudControllerBackpackCommand extends GeneratorCommand
         return $column;
     }
 
-
     protected function getAttributes($model)
     {
         $attributes = [];
         $model = new $model;
 
         // if fillable was defined, use that as the attributes
-        if (!count($model->getFillable())) {
+        if (! count($model->getFillable())) {
             $attributes = $model->getFillable();
         } else {
             // otherwise, if guarded is used, just pick up the columns straight from the bd table
@@ -136,7 +135,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
         $class = str_replace($this->getNamespace($name).'\\', '', $name);
         $model = 'App\Models\\'.$class;
 
-        if (!class_exists($model)) {
+        if (! class_exists($model)) {
             return $this;
         }
 
@@ -144,7 +143,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
 
         // create an array with the needed code for defining fields
         $fields = Arr::where($attributes, function ($value, $key) {
-            return !in_array($value, ['id', 'created_at', 'updated_at', 'deleted_at']);
+            return ! in_array($value, ['id', 'created_at', 'updated_at', 'deleted_at']);
         });
         if (count($fields)) {
             foreach ($fields as $key => $field) {
@@ -154,7 +153,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
 
         // create an array with the needed code for defining columns
         $columns = Arr::where($attributes, function ($value, $key) {
-            return !in_array($value, ['id']);
+            return ! in_array($value, ['id']);
         });
         if (count($columns)) {
             foreach ($columns as $key => $column) {
@@ -174,7 +173,7 @@ class CrudControllerBackpackCommand extends GeneratorCommand
      *
      * @param  string  $stub
      * @param  string  $name
-     * 
+     *
      * @return string
      */
     protected function replaceModel(&$stub, $name)
