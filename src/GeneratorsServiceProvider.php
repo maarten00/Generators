@@ -2,6 +2,7 @@
 
 namespace Backpack\Generators;
 
+use Backpack\Generators\Console\Commands\BuildBackpackCommand;
 use Backpack\Generators\Console\Commands\ChartBackpackCommand;
 use Backpack\Generators\Console\Commands\ChartControllerBackpackCommand;
 use Backpack\Generators\Console\Commands\ConfigBackpackCommand;
@@ -18,6 +19,7 @@ use Illuminate\Support\ServiceProvider;
 class GeneratorsServiceProvider extends ServiceProvider
 {
     protected $commands = [
+        BuildBackpackCommand::class,
         ConfigBackpackCommand::class,
         CrudModelBackpackCommand::class,
         CrudControllerBackpackCommand::class,
