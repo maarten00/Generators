@@ -103,7 +103,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
                 }
             }
 
-            $this->error('Model already exists! Could not add CrudTrait.');
+            $this->error('Model already exists! Could not add CrudTrait - please add manually.');
 
             return false;
         }
