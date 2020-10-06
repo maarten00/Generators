@@ -37,43 +37,53 @@ public function register()
 
 ## Usage
 
-Open the console and enter one of the commands to generate:
+Open the console and enter one of the commands:
 
-- Models (available options: --softdelete)
+
+- **Generate Backpack\CRUD interfaces for all Eloquent models that don't already have one:**
+
+```bash
+php artisan backpack:build
+```
+
+- **Generate all files for one new Backpack\CRUD interface:**
+
+``` bash
+php artisan backpack:crud {Entity_name}
+
+# this will create a Model if there isn't one, or add
+# our CrudTrait to the model if it already exists
+```
+
+- Generate a new Backpack\CRUD file:
+``` bash
+php artisan backpack:crud-controller {Entity_name}
+php artisan backpack:crud-model {Entity_name}
+php artisan backpack:crud-request {Entity_name}
+```
+
+- Generate a model (available options: --softdelete)
 
 ``` bash
 php artisan backpack:model {Entity_name}
 ```
 
-- Requests
+- Generate a request
 
 ``` bash
 php artisan backpack:request {Entity_name}
 ```
 
-- Views (available options: --plain)
+- Generate a view (available options: --plain)
 
 ``` bash
 php artisan backpack:view {Entity_name}
 ``` 
 
-- Config files
+- Generate a config file
 
 ``` bash
 php artisan backpack:config {Entity_name}
-```
-
-- All files for a new Backpack\CRUD interface:
-
-``` bash
-php artisan backpack:crud {Entity_name}
-```
-
-- A new Backpack\CRUD file:
-``` bash
-php artisan backpack:crud-controller {Entity_name}
-php artisan backpack:crud-model {Entity_name}
-php artisan backpack:crud-request {Entity_name}
 ```
 
 ## Change log
