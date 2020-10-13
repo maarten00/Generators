@@ -62,7 +62,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
              ! $this->option('force')) &&
              $this->alreadyExists($this->getNameInput())) {
             $file = $this->files->get($path);
-            $file_array = explode(PHP_EOL, $file);
+            $file_array = preg_split('/(\r\n)|\r|\n/', $file);
 
             // check if it already uses CrudTrait
             // if it does, do nothing
