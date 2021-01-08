@@ -53,7 +53,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
     {
         $name = $this->getNameInput();
         $namespaceApp = $this->qualifyClass($this->getNameInput());
-        $namespaceModels = $this->qualifyClass('/Models/' . $this->getNameInput());
+        $namespaceModels = $this->qualifyClass('/Models/'.$this->getNameInput());
 
         // Check if exists on app or models
         $existsOnApp = $this->alreadyExists($namespaceApp);
@@ -62,12 +62,13 @@ class CrudModelBackpackCommand extends GeneratorCommand
         // If no model was found, we will generate the path to the location where this class file
         // should be written. Then, we will build the class and make the proper replacements on
         // the stub files so that it gets the correctly formatted namespace and class name.
-        if (!$existsOnApp && !$existsOnModels) {
+        if (! $existsOnApp && ! $existsOnModels) {
             $this->makeDirectory($namespaceModels);
 
             $this->files->put($this->getPath($namespaceModels), $this->sortImports($this->buildClass($namespaceModels)));
 
-            $this->info($this->type . ' created successfully.');
+            $this->info($this->type.' created successfully.');
+
             return;
         }
 
@@ -88,7 +89,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
 
         // As the class already exists, we don't want to create the class and overwrite the
         // user's code. We just make sure it uses CrudTrait. We add that one line.
-        if (!$this->hasOption('force') || !$this->option('force')) {
+        if (! $this->hasOption('force') || ! $this->option('force')) {
             $file = $this->files->get($path);
             $lines = preg_split('/(\r\n)|\r|\n/', $file);
 
@@ -96,6 +97,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
             // if it does, do nothing
             if (Str::contains($file, $this->crudTrait)) {
                 $this->error('Model already uses CrudTrait.');
+
                 return;
             }
 
@@ -123,6 +125,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
                     // let the user know what we've done
                     $this->error('Model already exists!');
                     $this->info('We\'ve added CrudTrait on the Model.');
+
                     return;
                 }
             }
