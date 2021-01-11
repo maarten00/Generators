@@ -123,8 +123,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
                     $this->files->put($path, implode(PHP_EOL, $lines));
 
                     // let the user know what we've done
-                    $this->error('Model already exists!');
-                    $this->info('We\'ve added CrudTrait on the Model.');
+                    $this->info('Model already existed. Added CrudTrait to it.');
 
                     return;
                 }
