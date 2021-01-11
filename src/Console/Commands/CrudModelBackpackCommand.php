@@ -96,7 +96,7 @@ class CrudModelBackpackCommand extends GeneratorCommand
             // check if it already uses CrudTrait
             // if it does, do nothing
             if (Str::contains($file, $this->crudTrait)) {
-                $this->info('Model already used CrudTrait.');
+                $this->comment('Model already used CrudTrait.');
 
                 return;
             }
